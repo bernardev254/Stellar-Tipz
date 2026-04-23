@@ -4,6 +4,18 @@ import { BrowserRouter } from "react-router-dom";
 import TopCreatorsSection from "./TopCreatorsSection";
 import * as hooks from "@/hooks";
 
+// Mock env so contractId is truthy (otherwise loading=false and getLeaderboard is never called)
+vi.mock("@/helpers/env", () => ({
+  env: {
+    contractId: "MOCK_CONTRACT_ID",
+    sorobanRpcUrl: "https://soroban-testnet.stellar.org",
+    horizonUrl: "https://horizon-testnet.stellar.org",
+    networkPassphrase: "Test SDF Network ; September 2015",
+    network: "TESTNET",
+    useMockData: false,
+  },
+}));
+
 // Mock the hooks
 vi.mock("@/hooks", () => ({
   useContract: vi.fn(),
